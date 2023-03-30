@@ -5,9 +5,11 @@ use App\core\Application;
 use App\controllers\AuthController;
 use App\controllers\SiteController;
 
+
 require_once __DIR__.'/../vendor/autoload.php';
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
+
 
 
 $config = [
