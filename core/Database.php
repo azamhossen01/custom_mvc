@@ -59,6 +59,7 @@ class Database
         )ENGINE=INNODB;");
     }
 
+
     public function saveMigrations(array $migrations)
     {
         $newMigrations = implode(",",array_map(function($m){
@@ -71,5 +72,9 @@ class Database
     public function log($message)
     {
         echo '['.date('y-m-d H:i:s').']'. ' - ' . $message.PHP_EOL;
+    }
+    public function prepare($sql)
+    {
+        return $this->pdo->prepare($sql);
     }
 }
