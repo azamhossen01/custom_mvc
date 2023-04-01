@@ -44,4 +44,15 @@ class User extends DbModel
             'password_confirmation' => [ self::RULE_REQUIRED, [ self::RULE_MATCH, 'match' => 'password' ] ],
         ];
     }
+
+    public function labels() : array 
+    {
+        return [
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'email' => 'Email-Address',
+            'password' => 'Password',
+            'password_confirmation' => 'Confirm Password'
+        ];
+    }
 }

@@ -9,6 +9,7 @@ class Application
     public Request $request;
     public Response $response;
     public Controller $controller;
+    public Session $session;
     public static string $ROOT_DIR;
     public static Application $app;
     public Database $db;
@@ -18,6 +19,7 @@ class Application
         self::$app = $this;
         $this->response = new Response;
         $this->request = new Request;
+        $this->session = new Session;
         $this->router = new Router($this->request,$this->response);
         $this->db = new Database($config['db']);
     }

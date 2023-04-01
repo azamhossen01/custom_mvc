@@ -49,6 +49,7 @@ abstract class Model
                     $this->addError($attribute,self::RULE_MAX, $rule);
                 }
                 if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}){
+                    $rule['match'] = $this->getLabels($rule['match']);
                     $this->addError($attribute, self::RULE_MATCH, $rule);
                 }
                 if($ruleName === self::RULE_UNIQUE){
@@ -60,7 +61,7 @@ abstract class Model
                     $statement->execute();
                     $record = $statement->fetchObject();
                     if($record){
-                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $attribute]);
+                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $this->getLabels($attribute)]);
                     }
                 }
                 
@@ -95,5 +96,15 @@ abstract class Model
             self::RULE_MATCH => 'This field should be match with {match}',
             self::RULE_UNIQUE => '{field} must be unique'
         ];
+    }
+
+    public function labels(): array
+    {
+        return [];
+    }
+
+    public function getLabels($attribute)
+    {
+        return $this->labels()[$attribute] ?? $attribute;
     }
 }
